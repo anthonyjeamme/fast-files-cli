@@ -1,4 +1,4 @@
-const createCommand = () => {
+const createCommand = async () => {
 
 }
 

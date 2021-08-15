@@ -7,10 +7,9 @@ const { usage } = require("./usage")
 
 const availableCommands = ['init', 'create', 'import']
 
-const app = () => {
+const app = async () => {
 
     const args = process.argv.slice(2)
-
 
     if (!availableCommands.includes(args[0])) {
 
@@ -21,25 +20,15 @@ const app = () => {
 
     if (
         args[0] === 'init'
-    ) {
-        return initCommand(args.slice(1))
-    }
-
+    ) return await initCommand(...args.slice(1))
 
     if (
         args[0] === 'create'
-    ) {
-        return createCommand(args.slice(1))
-    }
+    ) return await createCommand(...args.slice(1))
 
     if (
-        args[0] === 'import '
-    ) {
-        return importCommand(args.slice(1))
-    }
-
-
-    console.log("ok")
+        args[0] === 'import'
+    ) return await importCommand(...args.slice(1))
 }
 
 app()
