@@ -9,7 +9,7 @@ const initCommand = async () => {
         process.exit(-1)
     }
 
-    mkdirp('.vscode/fast-files/templates')
+    await mkdirp('.vscode/fast-files/templates')
 
     console.log(`fast-files ${chalk.green(`initialized`)}`)
     console.log(``)

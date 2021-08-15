@@ -22,9 +22,9 @@ const app = async () => {
         args[0] === 'init'
     ) return await initCommand(...args.slice(1))
 
-    if (
-        args[0] === 'create'
-    ) return await createCommand(...args.slice(1))
+    // if (
+    //     args[0] === 'create'
+    // ) return await createCommand(...args.slice(1))
 
     if (
         args[0] === 'import'

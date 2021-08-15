@@ -26,7 +26,7 @@ const importCommand = async (userName, repoName, template) => {
         responseType: 'arraybuffer'
     })
 
-    mkdirp(`./.vscode/fast-files/tmp`)
+    await mkdirp(`./.vscode/fast-files/tmp`)
 
     const zipFilePath = `./.vscode/fast-files/tmp/${repoName}.zip`
 
