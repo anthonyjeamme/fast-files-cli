@@ -9,16 +9,13 @@ const mkdirp = require('mkdirp')
 
 const { removeDirectory } = require('../utils')
 
-const importCommand = async (userName, repoName, template) => {
+const importCommand = async (userName, repoName, ..._templates) => {
 
     if (!userName || !repoName) {
 
         console.log()
         process.exit(-1)
     }
-
-    // const userName = 'anthonyjeamme'
-    // const repoName = 'fast-files-templates'
 
     const zipUrl = `https://github.com/${userName}/${repoName}/archive/refs/heads/main.zip`
 
@@ -40,15 +37,9 @@ const importCommand = async (userName, repoName, template) => {
     fs.rmSync(zipFilePath)
 
 
-    if (template) {
+    const templates = _templates ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-main`)
 
-        if (!fs.existsSync(`./.vscode/fast-files/tmp/${repoName}-main/${template}`)) {
-
-
-            console.log(`${chalk.red("ERROR")} can't find template ${chalk.yellow(template)} in this repo`)
-
-            process.exit(-1)
-        }
+    for (const template of templates) {
 
         fse.copySync(
             `./.vscode/fast-files/tmp/${repoName}-main/${template}`,
@@ -56,21 +47,6 @@ const importCommand = async (userName, repoName, template) => {
         )
 
         console.log(`${chalk.green(template)} template imported`)
-
-    } else {
-
-        const templates = fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-main`)
-
-
-        for (const template of templates) {
-
-            fse.copySync(
-                `./.vscode/fast-files/tmp/${repoName}-main/${template}`,
-                `./.vscode/fast-files/templates/${template}`
-            )
-
-            console.log(`${chalk.green(template)} template imported`)
-        }
     }
 
     await removeDirectory(`./.vscode/fast-files/tmp/${repoName}-main`)
