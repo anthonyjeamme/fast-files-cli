@@ -39,7 +39,7 @@ const importCommand = async (userName, repoName, ..._templates) => {
     fs.rmSync(zipFilePath)
 
 
-    const templates = _templates.length ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-${branch}`)
+    const templates = _templates.length ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-${branch}`).filter(fileName => fileName !== "README.md")
 
     for (const template of templates) {
 
