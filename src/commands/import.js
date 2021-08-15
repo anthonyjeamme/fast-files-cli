@@ -17,8 +17,9 @@ const importCommand = async (userName, repoName, ..._templates) => {
         process.exit(-1)
     }
 
+    const branch = "master"
 
-    const zipUrl = `https://github.com/${userName}/${repoName}/archive/refs/heads/master.zip`
+    const zipUrl = `https://github.com/${userName}/${repoName}/archive/refs/heads/${branch}.zip`
 
 
     const zip = await axios.get(zipUrl, {
@@ -38,19 +39,19 @@ const importCommand = async (userName, repoName, ..._templates) => {
     fs.rmSync(zipFilePath)
 
 
-    const templates = _templates.length ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-main`)
+    const templates = _templates.length ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-${branch}`)
 
     for (const template of templates) {
 
         fse.copySync(
-            `./.vscode/fast-files/tmp/${repoName}-main/${template}`,
+            `./.vscode/fast-files/tmp/${repoName}-${branch}/${template}`,
             `./.vscode/fast-files/templates/${template}`
         )
 
         console.log(`${chalk.green(template)} template imported`)
     }
 
-    await removeDirectory(`./.vscode/fast-files/tmp/${repoName}-main`)
+    await removeDirectory(`./.vscode/fast-files/tmp/${repoName}-${branch}`)
 
 }
 
