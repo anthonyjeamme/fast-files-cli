@@ -1,0 +1,26 @@
+{
+  "name": "fast-files-cli",
+  "version": "0.0.2",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "bin": {
+    "fast-files": "./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonyjeamme/fast-files-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anthonyjeamme/fast-files-cli/issues"
+  },
+  "homepage": "https://github.com/anthonyjeamme/fast-files-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
