@@ -17,7 +17,9 @@ const importCommand = async (userName, repoName, ..._templates) => {
         process.exit(-1)
     }
 
-    const zipUrl = `https://github.com/${userName}/${repoName}/archive/refs/heads/main.zip`
+
+    const zipUrl = `https://github.com/${userName}/${repoName}/archive/refs/heads/master.zip`
+
 
     const zip = await axios.get(zipUrl, {
         responseType: 'arraybuffer'
@@ -32,12 +34,11 @@ const importCommand = async (userName, repoName, ..._templates) => {
     const stream = await fs.createReadStream(zipFilePath)
         .pipe(unzipper.Extract({ path: `./.vscode/fast-files/tmp/` }))
 
-
     await stream.promise()
     fs.rmSync(zipFilePath)
 
 
-    const templates = _templates ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-main`)
+    const templates = _templates.length ? _templates : fs.readdirSync(`./.vscode/fast-files/tmp/${repoName}-main`)
 
     for (const template of templates) {
 
